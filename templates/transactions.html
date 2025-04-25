@@ -48,7 +48,7 @@
     }
 
     .table thead tr {
-        background: linear-gradient(135deg, rgba(79, 82, 214, 0.95), rgba(148, 65, 227, 0.95));
+        background: linear-gradient(135deg, rgba(39, 87, 166, 0.95), rgba(52, 83, 239, 0.902));
         backdrop-filter: blur(4px);
     }
 
@@ -57,7 +57,7 @@
         top: 0;
         background: transparent;
         border: none;
-        color: #1f2937;
+        color: #e2e7ed;
         font-weight: 700;
         padding: 1.2rem 1rem;
         font-size: 0.95rem;
@@ -91,7 +91,7 @@
 
     .table tbody td {
         padding: 1rem;
-        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        border-bottom: 1px solid rgba(91, 93, 235, 0.1);
     }
 
     /* Add extra padding to first row */
@@ -107,102 +107,37 @@
 
     /* Category badges with pastel colors */
     /* Income Categories */
-    .category-Salary-or-Wages {
-        background-color: rgba(110, 231, 183, 0.2) !important;
-        color: #065f46 !important;
-    }
-    .category-Business-Income {
-        background-color: rgba(147, 197, 253, 0.2) !important;
-        color: #1e40af !important;
-    }
-    .category-Investments {
-        background-color: rgba(167, 139, 250, 0.2) !important;
-        color: #5b21b6 !important;
-    }
-    .category-Rental-Income {
-        background-color: rgba(249, 168, 212, 0.2) !important;
-        color: #9d174d !important;
-    }
-    .category-Gifts {
-        background-color: rgba(253, 186, 116, 0.2) !important;
-        color: #9a3412 !important;
-    }
-    .category-Bonuses-or-Commissions {
-        background-color: rgba(134, 239, 172, 0.2) !important;
-        color: #166534 !important;
-    }
-    .category-Side-Hustles {
-        background-color: rgba(196, 181, 253, 0.2) !important;
-        color: #5b21b6 !important;
-    }
-    .category-Pension-or-Retirement-Funds {
-        background-color: rgba(147, 197, 253, 0.2) !important;
-        color: #1e40af !important;
-    }
-    .category-Other-Income {
-        background-color: rgba(203, 213, 225, 0.2) !important;
-        color: #334155 !important;
-    }
+    /* General Category Badge Styling */
+.badge {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+    text-transform: none !important;
+    border: none !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
 
-    /* Expense Categories */
-    .category-Housing {
-        background-color: rgba(255, 99, 132, 0.2) !important;
-        color: #be123c !important;
-    }
-    .category-Food-and-Groceries {
-        background-color: rgba(255, 206, 86, 0.2) !important;
-        color: #854d0e !important;
-    }
-    .category-Transportation {
-        background-color: rgba(54, 162, 235, 0.2) !important;
-        color: #075985 !important;
-    }
-    .category-Healthcare {
-        background-color: rgba(75, 192, 192, 0.2) !important;
-        color: #0f766e !important;
-    }
-    .category-Personal-and-Household {
-        background-color: rgba(255, 159, 64, 0.2) !important;
-        color: #9a3412 !important;
-    }
-    .category-Entertainment-and-Leisure {
-        background-color: rgba(153, 102, 255, 0.2) !important;
-        color: #6b21a8 !important;
-    }
-    .category-Debt-and-Financial-Obligations {
-        background-color: rgba(201, 203, 207, 0.2) !important;
-        color: #334155 !important;
-    }
-    .category-Savings-and-Investments {
-        background-color: rgba(103, 216, 162, 0.2) !important;
-        color: #166534 !important;
-    }
-    .category-Insurance {
-        background-color: rgba(255, 183, 197, 0.2) !important;
-        color: #9d174d !important;
-    }
-    .category-Miscellaneous {
-        background-color: rgba(162, 162, 162, 0.2) !important;
-        color: #44403c !important;
-    }
+.badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
 
-    .badge {
-        font-size: 0.9rem !important;
-        font-weight: 500 !important;
-        padding: 0.5rem 1rem !important;
-        border-radius: 20px !important;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
-        transition: all 0.3s ease !important;
-        text-transform: none !important;
-        border: none !important;
-        white-space: nowrap !important;
-        display: inline-block !important;
-    }
+/* Income Category Badge */
+.category-income {
+    background-color: rgba(34, 197, 94, 0.2) !important;
+    color: #15803d !important;
+}
 
-    .badge:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    }
+/* Expense Category Badge */
+.category-expense {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    color: #991b1b !important;
+}
+
 
     .table tbody {
         position: relative;
@@ -227,13 +162,13 @@
     }
 
     .table-responsive::-webkit-scrollbar-thumb {
-        background: rgba(99, 102, 241, 0.4);
+        background: rgba(70, 72, 226, 0.4);
         border-radius: 4px;
         transition: background 0.3s ease;
     }
 
     .table-responsive::-webkit-scrollbar-thumb:hover {
-        background: rgba(99, 102, 241, 0.6);
+        background: rgba(72, 75, 235, 0.849);
     }
 
     /* Make sure the action buttons don't wrap */
@@ -300,6 +235,7 @@
     .btn-primary {
         background: linear-gradient(135deg, #007bff, #00bcd4);
         border: none;
+        border-radius: 25px;
         transition: transform 0.3s ease-in-out;
         margin-right: 10px;
     }
@@ -371,7 +307,7 @@
             🎙️ Add Expense by Voice
             </button>
             <a href="{{ url_for('suggestions') }}" 
-            class="btn btn-success mb-3 float-end" 
+            class="btn btn-primary mb-3 float-end" 
             id="getSuggestionsBtn">
             💡 Get Savings Suggestions
             </a>
@@ -401,7 +337,7 @@
                     </td>
                     <td class="description-cell">{{ transaction.description }}</td>
                     <td>
-                        <span class="badge category-{{ transaction.category_name|replace(' ', '-') }}">
+                        <span class="badge {% if transaction.category_type == 'income' %}category-income{% else %}category-expense{% endif %}">
                             {{ transaction.category_name }}
                         </span>
                     </td>
