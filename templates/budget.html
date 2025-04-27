@@ -4,13 +4,25 @@
 
 {% block content %}
 <div class="container py-5">
-    <h2 class="mb-4 fw-bold">Budget Goals</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0">Budget Goals</h2>
+        <a href="{{ url_for('suggestions') }}" 
+           class="btn btn-primary" 
+           id="getSuggestionsBtn">
+           💡 Get Savings Suggestions
+        </a>
+    </div>
+      
+
+   
 
     <!-- Add Budget Goal Form -->
     <div class="card shadow-sm mb-4 animate__animated animate__fadeIn">
         <div class="card-header bg-light">
             <h5 class="mb-0">Set Budget Goal</h5>
         </div>
+        
         <div class="card-body">
             <form method="POST" action="{{ url_for('budget') }}" class="needs-validation" novalidate>
                 <div class="row g-3">
@@ -339,6 +351,11 @@
         color: #4b5563;
         border-bottom: 1px solid rgba(229, 231, 235, 0.5);
     }
+    .fetching {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 
     /* Form Styling */
     .form-label {
@@ -445,6 +462,10 @@
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
 <script>
+    document.getElementById('getSuggestionsBtn').addEventListener('click', function(event) {
+    this.classList.add('fetching');
+    this.innerHTML = '⏳ Fetching Suggestions...';
+});
 document.addEventListener('DOMContentLoaded', function() {
     // Check for budget alerts in flashed messages
     const alerts = document.querySelectorAll('.alert-warning');
