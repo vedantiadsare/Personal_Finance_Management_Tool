@@ -202,34 +202,43 @@ def login():
 def register_page():
     if current_user.is_authenticated:
         return redirect(url_for('transactions'))
-    
+
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
-        
+
+        # Check password strength
+        if len(password) < 8:
+            flash('Password must be at least 8 characters long', 'danger')
+            return render_template('register.html')
+
+        if not re.search(r"[A-Z]", password) or not re.search(r"[a-z]", password) or not re.search(r"[0-9]", password) or not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+            flash('Password must include at least one uppercase letter, one lowercase letter, one number, and one special character', 'danger')
+            return render_template('register.html')
+
         if password != confirm_password:
             flash('Passwords do not match', 'danger')
             return render_template('register.html')
-        
+
         connection = get_db_connection()
         if connection:
             try:
                 cursor = connection.cursor(dictionary=True)
-                
+
                 # Check if username exists
                 cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
                 if cursor.fetchone():
                     flash('Username already exists', 'danger')
                     return render_template('register.html')
-                
+
                 # Check if email exists
                 cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
                 if cursor.fetchone():
                     flash('Email already exists', 'danger')
                     return render_template('register.html')
-                
+
                 # Create new user
                 hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
                 cursor.execute(
@@ -237,9 +246,10 @@ def register_page():
                     (username, email, hashed_password, datetime.utcnow())
                 )
                 connection.commit()
-                                # Get the user ID of the newly created user
+
+                # Get the user ID of the newly created user
                 user_id = cursor.lastrowid
-                
+
                 # Add default categories for the new user
                 default_income_categories = [
                     'Salary or Wages', 
@@ -252,7 +262,7 @@ def register_page():
                     'Pension or Retirement Funds', 
                     'Other Income'
                 ]
-                
+
                 default_expense_categories = [
                     'Housing', 
                     'Food and Groceries', 
@@ -265,19 +275,19 @@ def register_page():
                     'Insurance', 
                     'Miscellaneous'
                 ]
-                
+
                 for category_name in default_income_categories:
                     cursor.execute(
                         "INSERT INTO categories (name, type, user_id, created_at) VALUES (%s, %s, %s, %s)",
                         (category_name, 'income', user_id, datetime.utcnow())
                     )
-                
+
                 for category_name in default_expense_categories:
                     cursor.execute(
                         "INSERT INTO categories (name, type, user_id, created_at) VALUES (%s, %s, %s, %s)",
                         (category_name, 'expense', user_id, datetime.utcnow())
                     )
-                
+
                 connection.commit()
                 flash('Your account has been created! You can now log in.', 'success')
                 return redirect(url_for('login'))
@@ -291,7 +301,7 @@ def register_page():
                     connection.close()
         else:
             flash('Database connection error. Please try again later.', 'danger')
-    
+
     return render_template('register.html')
 
 @app.route('/transactions', methods=['GET', 'POST'])
@@ -1456,4 +1466,4 @@ def suggestions():
 
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)
